@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Takeaway - Home</title>
+    <style>
+        body { display: flex; }
+        .cart { width: 25%; padding: 10px; background-color: #f4f4f4; }
+        .content { width: 75%; padding: 10px; }
+    </style>
+</head>
+<body>
+    <div class="cart">
+        <h3>Your Cart</h3>
+        <ul>
+            {% for item in cart %}
+            <li>{{ item.name }} - ${{ item.price }}</li>
+            {% endfor %}
+        </ul>
+        <a href="/clear_cart">Clear Cart</a>
+    </div>
+    <div class="content">
+        <h1>Welcome to Our Takeaway!</h1>
+        <p>Order delicious food from our menu.</p>
+        <a href="/menu">Go to Menu</a>
+    </div>
+</body>
+</html>

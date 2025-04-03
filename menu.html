@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Takeaway - Menu</title>
+    <style>
+        body { display: flex; }
+        .cart { width: 25%; padding: 10px; background-color: #f4f4f4; }
+        .content { width: 75%; padding: 10px; }
+        .category { margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <div class="cart">
+        <h3>Your Cart</h3>
+        <ul>
+            {% for item in cart %}
+            <li>{{ item.name }} - ${{ item.price }}</li>
+            {% endfor %}
+        </ul>
+        <a href="/clear_cart">Clear Cart</a>
+    </div>
+    <div class="content">
+        <h1>Menu</h1>
+        {% for category, items in menu.items() %}
+        <div class="category">
+            <h2>{{ category }}</h2>
+            <ul>
+                {% for item in items %}
+                <li>
+                    {{ item["ItemName"] }} - ${{ item["Price"] }}
+                    {% if item["GF"] == "Yes" %}(GF){% endif %}
+                    {% if item["VG"] == "Yes" %}(VG){% endif %}
+                    {% if item["VEG"] == "Yes" %}(VEG){% endif %}
+                    <form method="POST" action="/add_to_cart" style="display: inline;">
+                        <input type="hidden" name="id" value="{{ item['ID'] }}">
+                        <input type="hidden" name="name" value="{{ item['ItemName'] }}">
+                        <input type="hidden" name="price" value="{{ item['Price'] }}">
+                        <button type="submit">Add to Cart</button>
+                    </form>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
